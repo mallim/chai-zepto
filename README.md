@@ -1,6 +1,6 @@
 # chai-zepto
 
-## Warning, this is an early untested version, at this stage all that i've done is renamed jQuery to Zepto in chai-zepto.js. I will update the tests and test further very soon.
+## Warning, this is an early untested version, currently this works with the script tag version of chai / zepto. I will test further very soon.
 
 chai-zepto is a fork of chai-jquery which is an extension to the [chai](http://chaijs.com/) assertion library that
 provides a set of jQuery-specific assertions.

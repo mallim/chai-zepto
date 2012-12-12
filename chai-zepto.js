@@ -16,6 +16,8 @@
   var inspect = utils.inspect,
       flag = utils.flag;
 
+  jQuery = Zepto || jQuery;
+
   jQuery.fn.inspect = function (depth) {
     var el = jQuery('<div />').append(this.clone());
     if (depth !== undefined) {
