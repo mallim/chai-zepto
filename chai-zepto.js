@@ -16,10 +16,11 @@
   var inspect = utils.inspect,
       flag = utils.flag;
 
-  jQuery = Zepto || jQuery;
-
-  jQuery.fn.inspect = function (depth) {
-    var el = jQuery('<div />').append(this.clone());
+  // jQuery = Zepto || jQuery;
+ 
+  /**
+  $.fn.inspect = function (depth) {
+    var el = Zepto('<div />').append(this.clone());
     if (depth !== undefined) {
       var children = el.children();
       while (depth-- > 0)
@@ -28,6 +29,8 @@
     }
     return el.html();
   };
+  **/
+
 
   var props = {attr: 'attribute', css: 'CSS property'};
   for (var prop in props) {
@@ -116,7 +119,7 @@
     );
   });
 
-  jQuery.each(['visible', 'hidden', 'selected', 'checked', 'disabled'], function (i, attr) {
+  Zepto.each(['visible', 'hidden', 'selected', 'checked', 'disabled'], function (i, attr) {
     chai.Assertion.addProperty(attr, function () {
       this.assert(
           flag(this, 'object').is(':' + attr)
@@ -128,7 +131,7 @@
   chai.Assertion.overwriteProperty('exist', function (_super) {
     return function () {
       var obj = flag(this, 'object');
-      if (obj instanceof jQuery) {
+      if (obj instanceof Zepto) {
         this.assert(
             obj.length > 0
           , 'expected ' + inspect(obj.selector) + ' to exist'
@@ -142,7 +145,7 @@
   chai.Assertion.overwriteProperty('empty', function (_super) {
     return function () {
       var obj = flag(this, 'object');
-      if (obj instanceof jQuery) {
+      if (obj instanceof Zepto) {
         this.assert(
           obj.is(':empty')
           , 'expected #{this} to be empty'
@@ -157,7 +160,7 @@
     return function () {
       var be = function (selector) {
         var obj = flag(this, 'object');
-        if (obj instanceof jQuery) {
+        if (obj instanceof Zepto) {
           this.assert(
               obj.is(selector)
             , 'expected #{this} to be #{exp}'
@@ -176,7 +179,7 @@
   chai.Assertion.overwriteMethod('match', function (_super) {
     return function (selector) {
       var obj = flag(this, 'object');
-      if (obj instanceof jQuery) {
+      if (obj instanceof Zepto) {
         this.assert(
             obj.is(selector)
           , 'expected #{this} to match #{exp}'
@@ -194,7 +197,7 @@
       _super.call(this);
       var contain = function (text) {
         var obj = flag(this, 'object');
-        if (obj instanceof jQuery) {
+        if (obj instanceof Zepto) {
           this.assert(
               obj.is(':contains(\'' + text + '\')')
             , 'expected #{this} to contain #{exp}'
@@ -213,7 +216,7 @@
   chai.Assertion.overwriteProperty('have', function (_super) {
     return function () {
       var obj = flag(this, 'object');
-      if (obj instanceof jQuery) {
+      if (obj instanceof Zepto) {
         var have = function (selector) {
           this.assert(
               // Using find() rather than has() to work around a jQuery bug:
